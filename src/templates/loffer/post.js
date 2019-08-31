@@ -14,6 +14,7 @@ const PostTemplate = (props) => {
                             <span className="date">
                                 {props.md.date}
                             </span>
+                            <span className="category"><a href={"/?categories=" + props.md.category}>{props.md.category}</a></span>
                             <ul className="tag">
                                 {props.md.tags.map((tag, index) => {
                                     return (

@@ -51,6 +51,10 @@ table {
   border-spacing: 0;
 }
 
+.category a{
+  margin: 0 20px 0 20px;
+}
+
 *, *:before, *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;

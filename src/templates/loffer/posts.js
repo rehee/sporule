@@ -2,8 +2,11 @@ import React from "react";
 
 
 const PostsTemplate = (props) => {
+    console.log(props);
     var prev;
     var next;
+    var categories;
+    var tags;
     if (props.prev) {
         prev = <span className="prev">
             <a href="#" className="prev" onClick={props.prev}>
@@ -18,9 +21,21 @@ const PostsTemplate = (props) => {
         </a>
         </span>;
     }
+    if (props.categories.length > 0) {
+        categories = <div>
+            Categories: {props.categories.join(",")}
+        </div>
+    }
+    if (props.tags.length > 0) {
+        tags = <div>
+            Tags: {props.tags.join(",")}
+        </div>
+    }
     return (
         <div id="main" role="main" className="wrapper-content">
             <div className="container">
+                {categories}
+                {tags}
                 <div className="posts">
                     {props.posts.items.map((md, index) => {
                         return (
@@ -33,11 +48,12 @@ const PostsTemplate = (props) => {
                                     <span className="date">
                                         {md.date}
                                     </span>
+                                    <span className="category"><a href={"/?categories=" + md.category}>{md.category}</a></span>
                                     <ul className="tag">
                                         {md.tags.map((tag, index) => {
                                             return (
                                                 <li key={index}>
-                                                    <a href="/">
+                                                    <a href={"/?tags="+tag}>
                                                         {tag}
                                                     </a>
                                                 </li>
