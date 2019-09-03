@@ -3,7 +3,8 @@ const TemplateConfig = {
     navs:
     {
         "Home": "/"
-    }
+    },
+    pages: ["aboutUs"]
 }
 
 module.exports = TemplateConfig;

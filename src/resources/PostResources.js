@@ -12,14 +12,15 @@ export default class PostResources {
         return instance;
     }
 
-    getAll(page, paths = this.defaultPaths, filterCategories = [], filterTags = []) {
+    getAll(page, paths = this.defaultPaths, filterCategories = [], filterTags = [], isPinnedOnly = false) {
         if (paths.length <= 0) {
             paths = this.defaultPaths;
         }
         let mdHandler = new MarkdownHandler();
         mdHandler.filterCategories = filterCategories;
         mdHandler.filterTags = filterTags;
-        mdHandler.excerptLength=100;
+        mdHandler.excerptLength = 100;
+        mdHandler.isPinnedOnly = isPinnedOnly;
         return mdHandler.loadMds(paths, page);
     }
 }

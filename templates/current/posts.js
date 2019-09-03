@@ -2,7 +2,6 @@ import React from "react";
 
 
 const PostsTemplate = (props) => {
-    console.log(props);
     var prev;
     var next;
     var categories;
@@ -53,7 +52,7 @@ const PostsTemplate = (props) => {
                                         {md.tags.map((tag, index) => {
                                             return (
                                                 <li key={index}>
-                                                    <a href={"/?tags="+tag}>
+                                                    <a href={"/?tags=" + tag}>
                                                         {tag}
                                                     </a>
                                                 </li>
@@ -61,6 +60,20 @@ const PostsTemplate = (props) => {
                                         })}
                                     </ul>
                                 </div>
+
+                                {
+                                    md.thumbnail.length > 0 ?
+                                        (
+                                            <div className="thumbnail">
+                                                <img src={md.thumbnail} />
+                                            </div>
+                                        )
+                                        : (
+                                            <div className="thumbnail">
+                                            </div>
+                                        )
+                                }
+
 
                                 <div className="entry">
                                     <p>{md.excerpt}</p>

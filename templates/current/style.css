@@ -1882,3 +1882,8 @@ pre.highlight {
     transform: rotate(360deg);
   }
 }
+
+.thumbnail{
+  max-height: 300px;
+  overflow: hidden;
+}

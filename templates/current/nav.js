@@ -1,5 +1,5 @@
 import React from "react";
-import Config from "../../../_config";
+import Config from "../../_config";
 import FooterTemplate from "./footer";
 import TemplateConfig from "./_templateConfig";
 

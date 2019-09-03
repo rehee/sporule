@@ -1,6 +1,5 @@
 import React from "react";
-import Config from "../../_config";
-const NavTemplate = require("../templates/" + Config.template + "/nav").default;
+import NavTemplate from "../../templates/current/nav";
 
 
 class Nav extends React.Component {

@@ -1,7 +1,8 @@
 export default {
   posts: {
     items: [
-      {"title": "", "content": "", "tags": [], "category": "", "date": "", "excerpt": "", thumbnail: "", "link": ""}
-    ]
+      {"title": "", "content": "", "tags": [], "category": "", "date": "", "excerpt": "", thumbnail: "", "link": "","pinned":false}
+    ],
+    linksTable:{}
   }
 };

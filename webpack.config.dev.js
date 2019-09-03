@@ -87,7 +87,7 @@ module.exports = {
     ),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: 'src/templates/' + Config.template + '/index.html',
+      template: 'templates/current/index.html',
       templateParameters: Config
     }),
     new MiniCssExtractPlugin({

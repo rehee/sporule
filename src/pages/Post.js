@@ -1,6 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
 import Config from "../../_config";
-const PostTemplate = require("../templates/" + Config.template + "/post").default;
+import * as PostActions from "../actions/PostAction";
+import PostTemplate from "../../templates/current/post";
 import renderHTML from 'react-render-html';
 import MarkdownIt from 'markdown-it';
 import Disqus from 'disqus-react';
@@ -18,11 +21,23 @@ class Post extends React.Component {
     }
 
     componentDidMount() {
-        this.loadPage();
+        let path = "";
+        if (this.props.posts.items[0].title.length <= 1) {
+            let resources = new PostResources();
+            resources.getAll(1).then(posts => {
+                if (posts != null && posts !== undefined) {
+                    path = posts.linksTable["/posts/" + this.props.match.params.path];
+                    this.loadSinglePost(path);
+                }
+            })
+        }
+        else {
+            path = this.props.posts.linksTable["/posts/" + this.props.match.params.path];
+            this.loadSinglePost(path);
+        }
     }
 
-    loadPage = () => {
-        var path = "/posts/" + this.props.match.params.path + ".md";
+    loadSinglePost = (path) => {
         let resources = new PostResources();
         resources.getAll(1, [path]).then(posts => {
             if (posts != null && posts !== undefined) {
@@ -35,8 +50,8 @@ class Post extends React.Component {
                     typography: true
                 }
                 const tocConfig = {
-                    "anchorClassName":"md-anchor",
-                    "tocClassName":"md-toc",
+                    "anchorClassName": "md-anchor",
+                    "tocClassName": "md-toc",
                     "tocCallback": function (tocMarkdown, tocArray, tocHtml) {
                         this.setState(() => {
                             return { "toc": tocHtml };
@@ -66,5 +81,17 @@ class Post extends React.Component {
 
 
 
-export default Post;
+function mapStateToProps(state) {
+    return {
+        posts: state.posts,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(PostActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
 

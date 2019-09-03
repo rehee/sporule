@@ -5,7 +5,10 @@ import Posts from '../pages/Posts';
 import Post from '../pages/Post';
 import Config from "../../_config";
 import Nav from "../pages/Nav";
-const ScriptsTemplate = require("../templates/" + Config.template + "/scripts").default;
+import CustomPage from "../pages/CustomPage";
+import ScriptsTemplate from "../../templates/current/scripts";
+
+
 
 
 
@@ -22,6 +25,7 @@ class Main extends React.Component {
                 <Switch>
                     <Route exact path="/" component={Posts} />
                     <Route exact path="/posts/:path" component={Post} />
+                    <Route exact path="/pages/:page" component={CustomPage} />
                 </Switch>
                 <ScriptsTemplate />
             </Router>
