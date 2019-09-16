@@ -15,7 +15,7 @@ const PostsTemplate = (props) => {
     }
     if (props.next) {
         next = <span className="next">
-            <a className="next" onClick={props.next}>
+            <a href="#" className="next" onClick={props.next}>
                 Next Page →
         </a>
         </span>;
@@ -45,11 +45,17 @@ const PostsTemplate = (props) => {
 
                                 <div className="meta">
                                     <span className="date">
-                                        {md.date}
+                                        {md.metas.date}
                                     </span>
-                                    <span className="category"><a href={"/?categories=" + md.category}>{md.category}</a></span>
+                                    {md.metas.categories.map((category, index) => {
+                                        return (
+                                            <span className="category" key={index}>
+                                                <a href={"/categories/" + category}>{category}</a>
+                                            </span>
+                                        );
+                                    })}
                                     <ul className="tag">
-                                        {md.tags.map((tag, index) => {
+                                        {md.metas.tags.map((tag, index) => {
                                             return (
                                                 <li key={index}>
                                                     <a href={"/?tags=" + tag}>
@@ -62,10 +68,10 @@ const PostsTemplate = (props) => {
                                 </div>
 
                                 {
-                                    md.thumbnail.length > 0 ?
+                                    md.metas.thumbnail.length > 0 ?
                                         (
                                             <div className="thumbnail">
-                                                <img src={md.thumbnail} />
+                                                <img src={md.metas.thumbnail} />
                                             </div>
                                         )
                                         : (

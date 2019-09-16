@@ -1,4 +1,7 @@
 import MarkdownHandler from 'markdown-handler';
+import Hash from 'object-hash';
+import { store } from "../index";
+import * as PostHelper from "../helpers/postHelper";
 
 let instance = null;
 
@@ -12,15 +15,24 @@ export default class PostResources {
         return instance;
     }
 
-    getAll(page, paths = this.defaultPaths, filterCategories = [], filterTags = [], isPinnedOnly = false) {
-        if (paths.length <= 0) {
-            paths = this.defaultPaths;
+    getAll(paths = this.defaultPaths) {
+        const states = store.getState();
+        const newHash = Hash(paths);
+        if (newHash == states.posts.hash) {
+            //check hash to see if we should update or not
+            return new Promise((resolve, reject) => {
+                resolve(null);
+            })
         }
         let mdHandler = new MarkdownHandler();
-        mdHandler.filterCategories = filterCategories;
-        mdHandler.filterTags = filterTags;
-        mdHandler.excerptLength = 100;
-        mdHandler.isPinnedOnly = isPinnedOnly;
-        return mdHandler.loadMds(paths, page);
+        return mdHandler.loadMds(paths).then(posts => {
+            posts.hash = newHash;
+            posts.categories = PostHelper.getCategories(posts);
+            posts.tags = PostHelper.getTags(posts);
+            posts.link = PostHelper.addLink(posts);
+            return new Promise((resolve, reject) => {
+                resolve(posts);
+            });
+        });
     }
 }

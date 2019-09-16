@@ -11,11 +11,11 @@ export function clearPostsSuccess() {
     return { type: types.CLEAR_POSTS_SUCCESS };
 }
 
-export function loadPosts(page,paths,filterCategories,filterTags,isPinnedOnly) {
+export function loadPosts(paths) {
     let resources = new PostResources();
     return function (dispatch) {
-        return resources.getAll(page,paths,filterCategories,filterTags,isPinnedOnly).then(Posts => {
-            if (Posts != null && Posts !== undefined) {
+        return resources.getAll(paths).then(Posts => {
+            if (Posts) {
                 dispatch(loadPostsSuccess(Posts));
             }
         })

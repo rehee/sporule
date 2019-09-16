@@ -17,8 +17,11 @@ module.exports = {
     path.resolve(__dirname, 'src/index')
   ],
   target: 'web',
+  externals: {
+    "jquery": "jQuery"
+  },
   output: {
-    path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
+    path: __dirname + '/dist', 
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -79,10 +82,10 @@ module.exports = {
           to: '',
         },
         {
-          context: __dirname + '/src',
-          from: 'posts/**/*',
+          context: __dirname+"/posts",
+          from: 'images/**/*',
           to: '',
-        },
+        }
       ]
     ),
     new webpack.HotModuleReplacementPlugin(),
@@ -98,7 +101,7 @@ module.exports = {
     }),
     new OfflinePlugin({
       responseStrategy: 'cache-first',
-      excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects'],
+      excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects','**/*.jpg','**/*.png','**/*.gif'],
       autoUpdate: 1000 * 60 * 2,
       externals: [
         'https://cdn.jsdelivr.net/npm/pwacompat@2.0.7/pwacompat.min.js',

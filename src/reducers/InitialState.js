@@ -1,8 +1,27 @@
 export default {
-  posts: {
-    items: [
-      {"title": "", "content": "", "tags": [], "category": "", "date": "", "excerpt": "", thumbnail: "", "link": "","pinned":false}
+  posts:
+  {
+    "items": [
+      {
+        "title": "",
+        "metas": {
+          "categories": [],
+          "tags": [],
+          "title": "",
+          "date": "",
+          "thumbnail": ""
+        },
+        "link": "",
+        "content": "",
+        "excerpt": "",
+        "path": ""
+      }
     ],
-    linksTable:{}
+    "categories": [],
+    "tags": [],
+    "invalidPage": false,
+    hash: "",
+    searchIndex: {}
   }
 };
+

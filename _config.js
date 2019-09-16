@@ -1,9 +1,12 @@
 const Config = {
     site: "Sporule",
+    url:"https://www.sporule.com",
     description: "Sporule is a micro blog site",
     keywords:"micro blog",
-    avatar:"https://pbs.twimg.com/profile_images/1070861268246978560/ObS2CG3t.jpg",
-    disqusShortname:"dealself"
+    logo:"https://i.imgur.com/MrRLOC4.png",
+    disqusShortname:"yourdisqusshortname",
+    postPerPage:8,
+    googleAnalyticsTag:123
 }
 
 module.exports = Config;

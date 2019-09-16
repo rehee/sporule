@@ -9,14 +9,20 @@ const PostTemplate = (props) => {
             <div id="main" role="main" className="wrapper-content withtoc">
                 <div className="container">
                     <article className="posts">
-                        <h1>{props.md.title}</h1>
+                        <h1>{props.post.title}</h1>
                         <div clsss="meta">
                             <span className="date">
-                                {props.md.date}
+                                {props.post.metas.date}
                             </span>
-                            <span className="category"><a href={"/?categories=" + props.md.category}>{props.md.category}</a></span>
+                            {props.post.metas.categories.map((category, index) => {
+                                return (
+                                    <span className="category" key={index}>
+                                        <a href={"/categories/" + category}>{category}</a>
+                                    </span>
+                                );
+                            })}
                             <ul className="tag">
-                                {props.md.tags.map((tag, index) => {
+                                {props.post.metas.tags.map((tag, index) => {
                                     return (
                                         <li key={index}>
                                             <a href="/">

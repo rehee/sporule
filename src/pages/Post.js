@@ -15,35 +15,33 @@ class Post extends React.Component {
         super(props, context);
         this.state = {
             "toc": "",
-            "content": "",
-            "meta": { "title": "", "content": "", "tags": [], "category": "", "date": "", "excerpt": "", thumbnail: "", "link": "" }
+            "post": {
+                "title": "",
+                "metas": {
+                    "categories": [],
+                    "tags": [],
+                    "title": "",
+                    "date": "",
+                    "thumbnail": ""
+                },
+                "link": "",
+                "content": "",
+                "excerpt": "",
+                "path": "",
+                "html": ""
+            }
         };
     }
 
     componentDidMount() {
-        let path = "";
-        if (this.props.posts.items[0].title.length <= 1) {
-            let resources = new PostResources();
-            resources.getAll(1).then(posts => {
-                if (posts != null && posts !== undefined) {
-                    path = posts.linksTable["/posts/" + this.props.match.params.path];
-                    this.loadSinglePost(path);
-                }
-            })
-        }
-        else {
-            path = this.props.posts.linksTable["/posts/" + this.props.match.params.path];
-            this.loadSinglePost(path);
-        }
+        let path = "/posts/" + this.props.match.params.path + ".md";
+        this.loadSinglePost(path);
     }
 
     loadSinglePost = (path) => {
         let resources = new PostResources();
-        resources.getAll(1, [path]).then(posts => {
-            if (posts != null && posts !== undefined) {
-                this.setState(() => {
-                    return { "meta": posts.items[0] };
-                });
+        resources.getAll([path]).then(posts => {
+            if (posts != null && posts !== undefined && posts.items.length > 0) {
                 const mdConfig = {
                     html: true,
                     linkify: true,
@@ -58,10 +56,13 @@ class Post extends React.Component {
                         });
                     }.bind(this)
                 }
-                const content = new MarkdownIt(mdConfig).use(markdownItTocAndAnchor, tocConfig).render(posts.items[0].content);
+                posts.items[0].html = new MarkdownIt(mdConfig).use(markdownItTocAndAnchor, tocConfig).render(posts.items[0].content);
                 this.setState(() => {
-                    return { "content": content };
+                    return { "post": posts.items[0] };
                 });
+            }
+            else {
+                window.location.href = "/";
             }
         })
     }
@@ -74,7 +75,7 @@ class Post extends React.Component {
             title: this.props.match.params.path,
         };
         return (
-            <PostTemplate toc={renderHTML(this.state.toc)} md={this.state.meta} content={renderHTML(this.state.content)} disqus={<Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />} />
+            <PostTemplate toc={renderHTML(this.state.toc)} post={this.state.post} content={renderHTML(this.state.post.html)} disqus={<Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />} />
         );
     }
 }

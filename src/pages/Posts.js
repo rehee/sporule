@@ -3,64 +3,99 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import queryString from 'query-string';
 import * as PostActions from "../actions/PostAction";
-import PostResources from "../resources/PostResources";
 import PostsTemplate from "../../templates/current/posts";
+import * as PostHelper from "../helpers/postHelper";
 
 
 class Posts extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            "pinnedPosts": [
-                { "title": "", "content": "", "tags": [], "category": "", "date": "", "excerpt": "", thumbnail: "", "link": "", "pinned": false }
-            ],
+            "pinnedPosts":
+            {
+                "items": [
+                    {
+                        "title": "",
+                        "metas": {
+                            "categories": [],
+                            "tags": [],
+                            "title": "",
+                            "date": "",
+                            "thumbnail": ""
+                        },
+                        "link": "",
+                        "content": "",
+                        "excerpt": "",
+                        "path": ""
+                    }
+                ],
+                "categories": [],
+                "tags": [],
+                "invalidPage": false,
+                hash: "",
+                searchIndex: {}
+            }
+            ,
+            "posts":
+            {
+                "items": [
+                    {
+                        "title": "",
+                        "metas": {
+                            "categories": [],
+                            "tags": [],
+                            "title": "",
+                            "date": "",
+                            "thumbnail": ""
+                        },
+                        "link": "",
+                        "content": "",
+                        "excerpt": "",
+                        "path": ""
+                    }
+                ],
+                "categories": [],
+                "tags": [],
+                "invalidPage": false,
+                hash: "",
+                searchIndex: {}
+            }
         };
-        const categoriesString = queryString.parse(this.props.location.search).categories;
+        const categoriesString = this.props.match.params.categories;
         const tagsString = queryString.parse(this.props.location.search).tags;
+        this.page = queryString.parse(this.props.location.search).page || 1;
         this.categories = categoriesString ? categoriesString.split(",") : [];
         this.tags = tagsString ? tagsString.split(",") : [];
+        this.searchString = queryString.parse(this.props.location.search).search || "";
+
     }
 
-    componentDidMount() {
-        const page = queryString.parse(this.props.location.search).page || 1;
-        this.props.actions.loadPosts(page, [], this.categories, this.tags);
-        this.loadPinnedPost();
-    }
-
-    loadPinnedPost = () => {
-        let resources = new PostResources();
-        resources.getAll(1, resources.defaultPaths, [], [], true).then(posts => {
-            if (posts != null && posts !== undefined) {
-                this.setState(() => {
-                    return { "pinnedPosts": posts.items };
-                });
-            }
-        });
-    }
 
     toPage = (page) => {
         window.location.href = window.location.pathname + "?page=" + page;
     }
 
     render() {
-        if (this.props.posts.invalidPage) {
-            this.toPage(1);
+        const pinnedPosts = PostHelper.getPinnedPosts(this.props.posts);
+        const posts = PostHelper.getPostsByPage(this.props.posts, this.page, true, this.searchString, this.categories, this.tags);
+        if (posts.invalidPage) {
+            //window.location.href = "/";
             return null;
         }
 
         var prev;
         var next;
-        if (this.props.posts.hasPrevPage) {
+        if (posts.hasPrevPage) {
             prev = () => {
-                this.toPage(parseInt(this.props.posts.page) - 1);
+                this.toPage(parseInt(posts.page) - 1);
             }
         }
-        if (this.props.posts.hasNextPage) {
+        if (posts.hasNextPage) {
             next = () => {
-                this.toPage(parseInt(this.props.posts.page) + 1);
+                this.toPage(parseInt(posts.page) + 1);
             }
         }
-        return <PostsTemplate posts={this.props.posts} categories={this.categories} tags={this.tags} prev={prev} next={next} pinned={this.state.pinnedPosts} />
+        return <PostsTemplate posts={posts} categories={this.categories} tags={this.tags} prev={prev} next={next} pinned={pinnedPosts} />
     }
 }
 

@@ -1,4 +1,3 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require('webpack');
 const path = require('path');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
@@ -9,21 +8,23 @@ const OfflinePlugin = require('offline-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const RobotstxtPlugin = require("robotstxt-webpack-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
-
-const GLOBALS = {
-  'process.env.NODE_ENV': JSON.stringify('production')
-};
+const Config = require("./_config");
 
 module.exports = {
+  mode: "production",
   entry: [
     "@babel/polyfill",
     path.resolve(__dirname, 'src/index.js')
   ],
   mode: "production",
   target: 'web',
+  externals: {
+    "jquery": "jQuery"
+  },
   output: {
-    path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
+    path: __dirname + '/dist',
     publicPath: '/',
     filename: '[name].[contenthash].js'
   },
@@ -33,15 +34,22 @@ module.exports = {
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
-  node: { fs: 'empty' },
+  node: {
+    fs: 'empty'
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.js$/,
+        loaders: ['unlazy'],
+        include: /node_modules\/markdown-toc/
       },
       {
         test: /(\.css)$/,
@@ -67,7 +75,6 @@ module.exports = {
           }
         }]
       }
-
     ]
   },
   plugins: [
@@ -79,38 +86,34 @@ module.exports = {
           to: '',
         },
         {
-          context: __dirname + '/src',
-          from: 'posts/**/*',
+          context: __dirname+"/posts",
+          from: 'images/**/*',
           to: '',
-        },
+        }
       ]
     ),
-    new SitemapPlugin('https://wwww.sporule.com', [
-      "/",
-      "/bargains/",
-      "/faq/",
+    new SitemapPlugin(Config.url, [
+      "/"
     ]),
     new RobotstxtPlugin({
       policy: [
         {
           userAgent: "*",
-          allow: "/",
-          disallow: "/links",
+          allow: "/"
         }
       ],
-      sitemap: "https://www.sporule.com/sitemap.xml",
-      host: "https://www.sporule.com"
+      sitemap: Config.url + "/sitemap.xml",
+      host: Config.url
     }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      title: 'Sporule'
+      template: 'templates/current/index.html',
+      templateParameters: Config
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.DefinePlugin(GLOBALS),
     new OfflinePlugin({
       responseStrategy: 'cache-first',
-      excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects'],
+      excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects','**/*.jpg','**/*.png','**/*.gif'],
       autoUpdate: 1000 * 60 * 2,
       externals: [
         'https://cdn.jsdelivr.net/npm/pwacompat@2.0.7/pwacompat.min.js',
@@ -125,9 +128,9 @@ module.exports = {
       chunkFilename: "[id].css"
     }),
     new WebpackPwaManifest({
-      name: 'Sporule',
-      short_name: 'Sporule',
-      description: 'Sporule',
+      name: Config.site,
+      short_name: Config.site,
+      description: Config.description,
       background_color: '#ffffff',
       includeDirectory: 'manifest.json',
       orientation: 'any',
@@ -140,12 +143,9 @@ module.exports = {
         }
       ],
       ios: {
-        'apple-mobile-web-app-title': 'Sporule',
+        'apple-mobile-web-app-title': Config.site,
         'apple-mobile-web-app-status-bar-style': 'black-translucent'
       }
     })
   ]
 }
-
-
-
