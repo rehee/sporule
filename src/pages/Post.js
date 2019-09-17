@@ -9,6 +9,14 @@ import MarkdownIt from 'markdown-it';
 import Disqus from 'disqus-react';
 import markdownItTocAndAnchor from "markdown-it-toc-and-anchor-with-slugid";
 import PostResources from "../resources/PostResources";
+import prism from 'markdown-it-prism';
+import "prismjs/components/prism-bash";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-python";
+import * as pj from "prismjs/components/prism-javascript";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-go";
+import "../styles/prism.css";
 
 class Post extends React.Component {
     constructor(props, context) {
@@ -45,7 +53,16 @@ class Post extends React.Component {
                 const mdConfig = {
                     html: true,
                     linkify: true,
-                    typography: true
+                    typography: true,
+                    highlight: function (str, lang) {
+                        if (lang && hljs.getLanguage(lang)) {
+                            try {
+                                return hljs.highlight(lang, str).value;
+                            } catch (__) { }
+                        }
+
+                        return ''; // use external default escaping
+                    }
                 }
                 const tocConfig = {
                     "anchorClassName": "md-anchor",
@@ -56,7 +73,10 @@ class Post extends React.Component {
                         });
                     }.bind(this)
                 }
-                posts.items[0].html = new MarkdownIt(mdConfig).use(markdownItTocAndAnchor, tocConfig).render(posts.items[0].content);
+                const prismConfig = {
+                  
+                }
+                posts.items[0].html = new MarkdownIt(mdConfig).use(markdownItTocAndAnchor, tocConfig).use(prism).render(posts.items[0].content);
                 this.setState(() => {
                     return { "post": posts.items[0] };
                 });

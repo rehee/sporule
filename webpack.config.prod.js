@@ -25,6 +25,7 @@ module.exports = {
   },
   output: {
     path: __dirname + '/dist',
+    publicPath: '/',
     filename: '[name].[contenthash].js'
   },
   devServer: {

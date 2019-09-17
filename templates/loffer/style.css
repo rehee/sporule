@@ -1894,3 +1894,8 @@ pre.highlight {
   width: auto!important;
   height: auto!important;
 }
+
+pre, code {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
