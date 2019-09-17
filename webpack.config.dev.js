@@ -120,7 +120,7 @@ module.exports = {
       "theme_color": "#3367D6",
       icons: [
         {
-          src: path.resolve('publish_assets/Logo.png'),
+          src: path.resolve('publish_assets/logo.png'),
           sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
         }
       ],
