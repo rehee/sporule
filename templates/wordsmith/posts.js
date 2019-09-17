@@ -31,7 +31,7 @@ const PostsTemplate = (props) => {
                                     return (
                                         <div key={index} className="featured__slide">
                                             <div className="entry" data-aos="zoom-in">
-                                                <div className="entry__background" style={{ "backgroundImage": "url(" + post.metas.thumbnail + ")" }}><a href={post.link}></a></div>
+                                                <div className="entry__background" style={{ "backgroundImage": "url(" + post.metas.coverimage + ")" }}><a href={post.link}></a></div>
                                                 <div className="entry__content">
                                                     {post.metas.categories.map((category, index) => {
                                                         return (
@@ -67,7 +67,7 @@ const PostsTemplate = (props) => {
                                         <div className="item-entry" data-aos="zoom-out">
                                             <div className="item-entry__thumb">
                                                 <a href={post.link} className="item-entry__thumb-link">
-                                                    <img src={post.metas.thumbnail} alt={post.title} />
+                                                    <img src={post.metas.coverimage} alt={post.title} />
                                                 </a>
                                             </div>
                                             <div className="item-entry__text">

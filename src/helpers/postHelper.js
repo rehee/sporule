@@ -64,6 +64,7 @@ export const getTags = (posts) => {
 export const getPostsByPage = (posts, page, excludePinned, searchString, categories, tags) => {
     let tempPosts = { ...posts };
     tempPosts = postsFilter(tempPosts, excludePinned, searchString, categories, tags);
+    tempPosts = sortPost(tempPosts);
     const postsSize = tempPosts.items.length;
     const itemsPerPage = page > 0 ? Config.postPerPage : 99999999;
     const totalPages = Math.ceil(postsSize / itemsPerPage);
@@ -74,7 +75,7 @@ export const getPostsByPage = (posts, page, excludePinned, searchString, categor
     tempPosts.hasNextPage = page < totalPages;
     tempPosts.invalidPage = page > totalPages;
     tempPosts.page = page;
-    return sortPost(tempPosts);
+    return tempPosts;
 }
 
 export const postsFilter = (posts, excludePinned, searchString, categories, tags) => {

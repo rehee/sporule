@@ -22,7 +22,7 @@ class Post extends React.Component {
                     "tags": [],
                     "title": "",
                     "date": "",
-                    "thumbnail": ""
+                    "coverimage": ""
                 },
                 "link": "",
                 "content": "",
@@ -40,7 +40,7 @@ class Post extends React.Component {
 
     loadSinglePost = (path) => {
         let resources = new PostResources();
-        resources.getAll([path]).then(posts => {
+        resources.getAll([path], true).then(posts => {
             if (posts != null && posts !== undefined && posts.items.length > 0) {
                 const mdConfig = {
                     html: true,

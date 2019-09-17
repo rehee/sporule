@@ -21,7 +21,7 @@ class Posts extends React.Component {
                             "tags": [],
                             "title": "",
                             "date": "",
-                            "thumbnail": ""
+                            "coverimage": ""
                         },
                         "link": "",
                         "content": "",
@@ -46,7 +46,7 @@ class Posts extends React.Component {
                             "tags": [],
                             "title": "",
                             "date": "",
-                            "thumbnail": ""
+                            "coverimage": ""
                         },
                         "link": "",
                         "content": "",

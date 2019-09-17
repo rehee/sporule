@@ -7,7 +7,7 @@ const PostTemplate = (props) => {
                 <article className="row entry format-standard">
                     <div className="entry__media col-full">
                         <div className="entry__post-thumb">
-                            <img src={props.post.metas.thumbnail} sizes="(max-width: 2000px) 100vw, 2000px" alt="" />
+                            <img src={props.post.metas.coverimage} sizes="(max-width: 2000px) 100vw, 2000px" alt="" />
                         </div>
                     </div>
                     <div className="entry__header col-full">

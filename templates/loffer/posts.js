@@ -68,10 +68,10 @@ const PostsTemplate = (props) => {
                                 </div>
 
                                 {
-                                    md.metas.thumbnail.length > 0 ?
+                                    md.metas.coverimage.length > 0 ?
                                         (
                                             <div className="thumbnail">
-                                                <img src={md.metas.thumbnail} />
+                                                <img src={md.metas.coverimage} />
                                             </div>
                                         )
                                         : (

@@ -9,7 +9,7 @@ export default {
           "tags": [],
           "title": "",
           "date": "",
-          "thumbnail": ""
+          "coverimage": ""
         },
         "link": "",
         "content": "",
