@@ -4,7 +4,7 @@ author: "Sporule"
 date: "2019-09-10"
 categories: "Another Demo"
 tags: "tagA,tagD"
-coverImage: "[images/logo.png](https://i.imgur.com/GzmpA4s.png)"
+coverImage: "https://i.imgur.com/GzmpA4s.png"
 ---
 
 # Paragraph 1
