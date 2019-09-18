@@ -37,7 +37,7 @@ const NavTemplate = () => {
                         </li>
                     </ul>
                     <p>
-                        Copyright (c) 2019 <a href="/">{Config.site}</a>, Template By <a href="https://github.com/FromEndWorld/loffer" target="_blank" rel="nofollow">Loffer</a>. Powered By <a href="https://www.sporule.com" target="_blank">Sporule</a>.
+                        Copyright (c) 2019 <a href="/">{Config.site}</a>, Template By <a href="https://github.com/FromEndWorld/loffer" target="_blank">Loffer</a>. Powered By <a href="https://www.sporule.com" target="_blank">Sporule</a>.
                 </p>
                 </footer>
             </div>
