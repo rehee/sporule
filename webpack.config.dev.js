@@ -90,7 +90,7 @@ module.exports = {
     ),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: 'templates/current/index.html',
+      template: 'templates/index.html',
       templateParameters: Config
     }),
     new MiniCssExtractPlugin({
