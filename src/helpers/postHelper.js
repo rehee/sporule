@@ -3,8 +3,13 @@ import * as Utility from "./utility";
 
 export const getPinnedPosts = (posts) => {
     let tempPosts = { ...posts };
-    tempPosts.items = tempPosts.items.filter(post => post.metas.pinned)
-    return sortPost(tempPosts);
+    tempPosts = sortPost(tempPosts);
+    const pinnedPosts = tempPosts.items.filter(post => post.metas.pinned)
+    if (pinnedPosts.length > 0) {
+        pinnedPosts = tempPosts.items.slice(0, 10);
+    }
+    tempPosts.items = pinnedPosts;
+    return tempPosts;
 }
 
 export const removeFuturePosts = (posts) => {
