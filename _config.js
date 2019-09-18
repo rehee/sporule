@@ -4,8 +4,8 @@ const Config = {
     description: "Sporule is a micro blog site",
     keywords:"micro blog",
     logo:"https://i.imgur.com/MrRLOC4.png",
-    disqusShortname:"yourdisqusshortname",
-    postPerPage:8,
+    disqusShortname:"sporule",
+    postPerPage:10,
     googleAnalyticsTag:123
 }
 
