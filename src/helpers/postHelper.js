@@ -5,7 +5,7 @@ export const getPinnedPosts = (posts) => {
     let tempPosts = { ...posts };
     tempPosts = sortPost(tempPosts);
     const pinnedPosts = tempPosts.items.filter(post => post.metas.pinned)
-    if (pinnedPosts.length > 0) {
+    if (pinnedPosts.length < 1) {
         pinnedPosts = tempPosts.items.slice(0, 10);
     }
     tempPosts.items = pinnedPosts;
