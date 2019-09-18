@@ -7,6 +7,7 @@ import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import { PersistGate } from 'redux-persist/integration/react';
 import * as PostAction from "./actions/PostAction";
 import App from './pages/App';
+import Config from "../_config";
 import "./styles/styles.css";
 
 if ('serviceWorker' in navigator) {

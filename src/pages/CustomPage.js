@@ -1,5 +1,5 @@
 import React from "react";
-import CustomPages from "../../templates/current/customPages";
+import CustomPages from "../../templates/customPages";
 
 class CustomPage extends React.Component {
     constructor(props, context) {

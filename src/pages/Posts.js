@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import queryString from 'query-string';
 import * as PostActions from "../actions/PostAction";
-import PostsTemplate from "../../templates/current/posts";
+import PostsTemplate from "../../templates/posts";
 import * as PostHelper from "../helpers/postHelper";
 
 
