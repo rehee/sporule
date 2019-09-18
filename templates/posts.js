@@ -1,101 +1,109 @@
 import React from "react";
+import TemplateConfig from "./_templateConfig";
 
 
 const PostsTemplate = (props) => {
     var prev;
     var next;
-    var categories;
-    var tags;
     if (props.prev) {
-        prev = <span className="prev">
-            <a href="#" className="prev" onClick={props.prev}>
-                ← Previous Page
+        prev = <li>
+            <a href="#" className="pgn__prev" onClick={props.prev}>
+                Previous
         </a>
-        </span>;
+        </li>;
     }
     if (props.next) {
-        next = <span className="next">
-            <a href="#" className="next" onClick={props.next}>
-                Next Page →
+        next = <li>
+            <a href="#" className="pgn__next" onClick={props.next}>
+                Next
         </a>
-        </span>;
+        </li>;
     }
-    if (props.categories.length > 0) {
-        categories = <div>
-            Categories: {props.categories.join(",")}
-        </div>
-    }
-    if (props.tags.length > 0) {
-        tags = <div>
-            Tags: {props.tags.join(",")}
-        </div>
-    }
+
     return (
-        <div id="main" role="main" className="wrapper-content">
-            <div className="container">
-                {categories}
-                {tags}
-                <div className="posts">
-                    {props.posts.items.map((md, index) => {
-                        return (
-                            <article key={index} className="post">
-                                <h1>
-                                    <a href={md.link}>{md.title}</a>
-                                </h1>
-
-                                <div className="meta">
-                                    <span className="date">
-                                        {md.metas.date}
-                                    </span>
-                                    {md.metas.categories.map((category, index) => {
-                                        return (
-                                            <span className="category" key={index}>
-                                                <a href={"/categories/" + category}>{category}</a>
-                                            </span>
-                                        );
-                                    })}
-                                    <ul className="tag">
-                                        {md.metas.tags.map((tag, index) => {
-                                            return (
-                                                <li key={index}>
-                                                    <a href={"/?tags=" + tag}>
-                                                        {tag}
-                                                    </a>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                </div>
-
-                                {
-                                    md.metas.coverimage.length > 0 ?
-                                        (
-                                            <div className="thumbnail">
-                                                <img src={md.metas.coverimage} />
+        <React.Fragment>
+            <section className="s-featured">
+                <div className="row">
+                    <div className="col-full">
+                        <div className="featured-slider featured" data-aos="flip-left">
+                            {
+                                props.pinned.items.slice(0, TemplateConfig.maximumPinnedPosts).map((post, index) => {
+                                    return (
+                                        <div key={index} className="featured__slide">
+                                            <div className="entry" data-aos="zoom-in">
+                                                <div className="entry__background" style={{ "backgroundImage": "url(" + post.metas.coverimage + ")" }}><a href={post.link}></a></div>
+                                                <div className="entry__content">
+                                                    {post.metas.categories.map((category, index) => {
+                                                        return (
+                                                            <span className="entry__category" key={index}>
+                                                                <a href={"/categories/" + category}>{category}</a>
+                                                            </span>
+                                                        );
+                                                    })}
+                                                    <h1><a href={post.link} title="">{post.title}</a></h1>
+                                                    <div className="entry__info">
+                                                        <ul className="entry__meta">
+                                                            <li>{post.metas.date}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        )
-                                        : (
-                                            <div className="thumbnail">
+                                        </div>
+                                    );
+                                })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="s-content">
+                <div className="row entries-wrap wide">
+                    <div className="entries">
+                        {
+                            props.posts.items.map((post, index) => {
+                                return (
+                                    <article key={index} className="col-block">
+                                        <div className="item-entry" data-aos="zoom-out">
+                                            <div className="item-entry__thumb">
+                                                <a href={post.link} className="item-entry__thumb-link">
+                                                    <img src={post.metas.coverimage} alt={post.title} />
+                                                </a>
                                             </div>
-                                        )
-                                }
+                                            <div className="item-entry__text">
+                                                <div className="item-entry__cat">
+                                                    {post.metas.categories.map((category, index) => {
+                                                        return (
+                                                            <a href={"/categories/" + category} key={index}> {category}</a>
+                                                        );
+                                                    })}
+                                                </div>
+                                                <h1 className="item-entry__title"><a href={post.link}>{post.title}</a></h1>
+                                                <div className="item-entry__date">
+                                                    {post.metas.date}
+                                                </div>
+                                            </div>
+                                        </div>
 
-
-                                <div className="entry">
-                                    <p>{md.excerpt}</p>
-                                </div>
-
-                                <a href={md.link} className="read-more">Read More</a>
-                            </article>
-                        );
-                    })}
+                                    </article>
+                                );
+                            })
+                        }
+                    </div>
                 </div>
-                <div className="pagination">
-                    {prev}
-                    {next}
+                <div className="row pagination-wrap">
+                    <div className="col-full">
+                        <nav className="pgn">
+                            <ul>
+                                {prev}
+                                {next}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-        </div>
+
+            </section>
+        </React.Fragment>
     );
 }
 
