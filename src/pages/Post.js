@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import Config from "../../_config";
 import * as PostActions from "../actions/PostAction";
-import PostTemplate from "../../templates/current/post";
+import PostTemplate from "../../templates/post";
 import renderHTML from 'react-render-html';
 import MarkdownIt from 'markdown-it';
 import Disqus from 'disqus-react';

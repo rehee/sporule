@@ -6,7 +6,7 @@ const Config = {
     logo:"https://i.imgur.com/MrRLOC4.png",
     disqusShortname:"yourdisqusshortname",
     postPerPage:8,
-    googleAnalyticsTag:123
+    googleAnaltics:""
 }
 
 module.exports = Config;

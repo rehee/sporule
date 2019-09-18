@@ -1,5 +1,5 @@
 import React from "react";
-import FooterTemplate from "../../templates/current/footer";
+import FooterTemplate from "../../templates/footer";
 
 
 

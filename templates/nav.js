@@ -1,5 +1,5 @@
 import React from "react";
-import Config from "../../_config";
+import Config from "../_config";
 import TemplateConfig from "./_templateConfig";
 
 const NavTemplate = () => {
