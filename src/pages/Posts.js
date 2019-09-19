@@ -70,6 +70,10 @@ class Posts extends React.Component {
 
     }
 
+    componentDidMount() {
+        document.title = document.title.split(" - ")[0] + " - " + "Posts";
+    }
+
 
     toPage = (page) => {
         window.location.href = window.location.pathname + "?page=" + page;
