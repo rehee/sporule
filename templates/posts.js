@@ -25,12 +25,12 @@ const PostsTemplate = (props) => {
             <section className="s-featured">
                 <div className="row">
                     <div className="col-full">
-                        <div className="featured-slider featured" data-aos="flip-left">
+                        <div className="featured-slider featured">
                             {
                                 props.pinned.items.slice(0, TemplateConfig.maximumPinnedPosts).map((post, index) => {
                                     return (
                                         <div key={index} className="featured__slide">
-                                            <div className="entry" data-aos="zoom-in">
+                                            <div className="entry">
                                                 <div className="entry__background" style={{ "backgroundImage": "url(" + post.metas.coverimage + ")" }}><a href={post.link}></a></div>
                                                 <div className="entry__content">
                                                     {post.metas.categories.map((category, index) => {
