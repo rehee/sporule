@@ -107,7 +107,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: 'templates/index.html',
+      template: 'template/index.html',
       templateParameters: Config
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
