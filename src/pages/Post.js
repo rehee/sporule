@@ -46,6 +46,7 @@ class Post extends React.Component {
         this.loadSinglePost(path);
     }
 
+
     loadSinglePost = (path) => {
         let resources = new PostResources();
         resources.getAll([path], true).then(posts => {
@@ -74,7 +75,7 @@ class Post extends React.Component {
                     }.bind(this)
                 }
                 const prismConfig = {
-                  
+
                 }
                 posts.items[0].html = new MarkdownIt(mdConfig).use(markdownItTocAndAnchor, tocConfig).use(prism).render(posts.items[0].content);
                 this.setState(() => {
@@ -88,6 +89,7 @@ class Post extends React.Component {
     }
 
     render() {
+        document.title = document.title.split(" - ")[0] + " - " + this.state.post.title;
         const disqusShortname = Config.disqusShortname;
         const disqusConfig = {
             url: window.location.href,
