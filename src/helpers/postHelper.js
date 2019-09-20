@@ -38,6 +38,7 @@ export const addLink = (posts) => {
     let tempPosts = { ...posts };
     tempPosts.items = tempPosts.items.map(o => {
         o.link = o.path.replace(".md", "");
+        return o;
     })
     return tempPosts;
 }
