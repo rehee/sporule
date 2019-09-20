@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import queryString from 'query-string';
 import * as PostActions from "../actions/PostAction";
-import PostsTemplate from "../../templates/posts";
+import PostsTemplate from "../../template/posts";
 import * as PostHelper from "../helpers/postHelper";
 
 
@@ -68,6 +68,10 @@ class Posts extends React.Component {
         this.tags = tagsString ? tagsString.split(",") : [];
         this.searchString = queryString.parse(this.props.location.search).search || "";
 
+    }
+
+    componentDidMount() {
+        document.title = document.title.split(" - ")[0] + " - " + "Posts";
     }
 
 

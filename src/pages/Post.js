@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import Config from "../../_config";
 import * as PostActions from "../actions/PostAction";
-import PostTemplate from "../../templates/post";
+import PostTemplate from "../../template/post";
 import renderHTML from 'react-render-html';
 import MarkdownIt from 'markdown-it';
 import Disqus from 'disqus-react';
@@ -17,6 +17,7 @@ import * as pj from "prismjs/components/prism-javascript";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-go";
 import "../styles/prism.css";
+import iterator from 'markdown-it-for-inline';
 
 class Post extends React.Component {
     constructor(props, context) {
@@ -46,6 +47,7 @@ class Post extends React.Component {
         this.loadSinglePost(path);
     }
 
+
     loadSinglePost = (path) => {
         let resources = new PostResources();
         resources.getAll([path], true).then(posts => {
@@ -74,9 +76,22 @@ class Post extends React.Component {
                     }.bind(this)
                 }
                 const prismConfig = {
-                  
+
                 }
-                posts.items[0].html = new MarkdownIt(mdConfig).use(markdownItTocAndAnchor, tocConfig).use(prism).render(posts.items[0].content);
+                posts.items[0].html = new MarkdownIt(mdConfig).use(markdownItTocAndAnchor, tocConfig).use(prism).use(iterator, 'url_new_win', 'link_open', function (tokens, idx) {
+                    var aIndex = tokens[idx].attrIndex('target');
+                    if (aIndex < 0) {
+                        tokens[idx].attrPush(['target', '_blank']);
+                    } else {
+                        tokens[idx].attrs[aIndex][1] = '_blank';
+                    }
+                    var aIndex = tokens[idx].attrIndex('rel');
+                    if (aIndex < 0) {
+                        tokens[idx].attrPush(['rel', 'nofollow']);
+                    } else {
+                        tokens[idx].attrs[aIndex][1] = 'nofollow';
+                    }
+                }).render(posts.items[0].content);
                 this.setState(() => {
                     return { "post": posts.items[0] };
                 });
@@ -88,6 +103,7 @@ class Post extends React.Component {
     }
 
     render() {
+        document.title = document.title.split(" - ")[0] + " - " + this.state.post.title;
         const disqusShortname = Config.disqusShortname;
         const disqusConfig = {
             url: window.location.href,

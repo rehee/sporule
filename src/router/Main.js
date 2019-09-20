@@ -5,7 +5,7 @@ import Posts from '../pages/Posts';
 import Post from '../pages/Post';
 import Nav from "../pages/Nav";
 import CustomPage from "../pages/CustomPage";
-import ScriptsTemplate from "../../templates/scripts";
+import ScriptsTemplate from "../../template/scripts";
 import Footer from "../pages/Footer";
 
 
