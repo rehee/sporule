@@ -1,5 +1,5 @@
 import React from "react";
-import NavTemplate from "../../templates/nav";
+import NavTemplate from "../../template/nav";
 import { connect } from "react-redux";
 import Config from "../../_config";
 import analytics from 'universal-ga';

@@ -3,11 +3,17 @@ import * as Utility from "./utility";
 
 export const getPinnedPosts = (posts) => {
     let tempPosts = { ...posts };
-    tempPosts.items = tempPosts.items.filter(post => post.metas.pinned)
-    return sortPost(tempPosts);
+    tempPosts = sortPost(tempPosts);
+    let pinnedPosts = tempPosts.items.filter(post => post.metas.pinned)
+    if (pinnedPosts.length < 1) {
+        pinnedPosts = tempPosts.items.slice(0, 10);
+    }
+    tempPosts.items = pinnedPosts;
+    return tempPosts;
 }
 
 export const removeFuturePosts = (posts) => {
+    //remove future and posts with no date
     let tempPosts = { ...posts };
     tempPosts.items = tempPosts.items.filter(post => {
         if (post.metas.date && post.metas.date != "null") {
@@ -19,7 +25,7 @@ export const removeFuturePosts = (posts) => {
 }
 
 export const sortPost = (posts, isDesc = true) => {
-    let tempPosts = { ...posts };
+    let tempPosts = removeFuturePosts({ ...posts });
     tempPosts.items = tempPosts.items.sort((a, b) => {
         let dateA = new Date(a.metas.date);
         let dateB = new Date(b.metas.date);
@@ -30,9 +36,11 @@ export const sortPost = (posts, isDesc = true) => {
 
 export const addLink = (posts) => {
     let tempPosts = { ...posts };
-    return tempPosts.items.map(o => {
+    tempPosts.items = tempPosts.items.map(o => {
         o.link = o.path.replace(".md", "");
+        return o;
     })
+    return tempPosts;
 }
 
 export const getCategories = (posts) => {
@@ -98,5 +106,5 @@ export const postsFilter = (posts, excludePinned, searchString, categories, tags
             return Utility.isIntersect(o.metas.tags, tags);
         })
     }
-    return removeFuturePosts(tempPosts);
+    return tempPosts;
 }
