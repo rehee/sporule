@@ -14,6 +14,7 @@
     "disqus-react": "^1.0.6",
     "markdown-handler": "^0.3.0",
     "markdown-it": "^9.1.0",
+    "markdown-it-for-inline": "^0.1.1",
     "markdown-it-prism": "^2.0.3",
     "markdown-it-toc-and-anchor-with-slugid": "^1.1.4",
     "markdown-toc-unlazy": "^1.0.1",

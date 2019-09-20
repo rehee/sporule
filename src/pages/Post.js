@@ -17,6 +17,7 @@ import * as pj from "prismjs/components/prism-javascript";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-go";
 import "../styles/prism.css";
+import iterator from 'markdown-it-for-inline';
 
 class Post extends React.Component {
     constructor(props, context) {
@@ -77,7 +78,20 @@ class Post extends React.Component {
                 const prismConfig = {
 
                 }
-                posts.items[0].html = new MarkdownIt(mdConfig).use(markdownItTocAndAnchor, tocConfig).use(prism).render(posts.items[0].content);
+                posts.items[0].html = new MarkdownIt(mdConfig).use(markdownItTocAndAnchor, tocConfig).use(prism).use(iterator, 'url_new_win', 'link_open', function (tokens, idx) {
+                    var aIndex = tokens[idx].attrIndex('target');
+                    if (aIndex < 0) {
+                        tokens[idx].attrPush(['target', '_blank']);
+                    } else {
+                        tokens[idx].attrs[aIndex][1] = '_blank';
+                    }
+                    var aIndex = tokens[idx].attrIndex('rel');
+                    if (aIndex < 0) {
+                        tokens[idx].attrPush(['rel', 'nofollow']);
+                    } else {
+                        tokens[idx].attrs[aIndex][1] = 'nofollow';
+                    }
+                }).render(posts.items[0].content);
                 this.setState(() => {
                     return { "post": posts.items[0] };
                 });
