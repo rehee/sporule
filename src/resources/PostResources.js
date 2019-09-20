@@ -29,7 +29,7 @@ export default class PostResources {
             posts.hash = newHash;
             posts.categories = PostHelper.getCategories(posts);
             posts.tags = PostHelper.getTags(posts);
-            posts.link = PostHelper.addLink(posts);
+            posts = PostHelper.addLink(posts);
             return new Promise((resolve, reject) => {
                 resolve(posts);
             });
