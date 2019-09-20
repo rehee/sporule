@@ -1,5 +1,5 @@
 const TemplateConfig = {
-    github_link: "https://github.com/sporule/sporule",
+    github_link: "https://github.com/hao-hao-hao",
     navs:
     {
         "Home": "/"
