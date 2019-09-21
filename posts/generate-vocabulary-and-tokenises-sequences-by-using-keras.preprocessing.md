@@ -22,12 +22,13 @@ qa_df = pd.read_csv("python_qa.csv",encoding = "ISO-8859-1",sep='\t')
 
 The data format
 
- 	|Question|	Answer
-0	|How can I find the full path to a font from it...|	Unfortunately the only API that isn't depr|ecat...|
-1	|Get a preview JPEG of a PDF on Windows? I have...|	ImageMagick delegates the PDF->bitmap conv|ersi...|
-2	|Continuous Integration System for a Python Cod...|	One possibility is Hudson. It's written in Ja..|.|
-3	|cx_Oracle: How do I iterate over a result set?...|	The canonical way is to use the built-in curs|o...|
-4	|Using 'in' to match an attribute of Python obj...|	Using a list comprehension would build a tempo...
+  |     | Question                                          | Answer                                            |
+  | --- | ------------------------------------------------- | ------------------------------------------------- |
+  | 0   | How can I find the full path to a font from it... | Unfortunately the only API that isn't deprecat... |
+  | 1   | Get a preview JPEG of a PDF on Windows? I have... | ImageMagick delegates the PDF->bitmap conversi... |
+  | 2   | Continuous Integration System for a Python Cod... | One possibility is Hudson. It's written in Ja...  |
+  | 3   | cx_Oracle: How do I iterate over a result set?... | The canonical way is to use the built-in curs     |
+  | 4   | Using 'in' to match an attribute of Python obj... | Using a list comprehension would build a tempo... |
 
 The function to generate the vocab
 
