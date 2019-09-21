@@ -1,61 +1,49 @@
 ---
-title: "Learn D3.js and Build a simple Mind Map web application in a day with Flask"
+title: "Integration of CKEditor 4 with Imgur Plugin (Image Uploading)"
 author: "Sporule"
-date: "2018-10-13"
+date: "2018-10-22"
 categories: "coding"
-tags: "d3.js,python,flask,javascript"
-coverimage: "https://i0.wp.com/blog.knoldus.com/wp-content/uploads/2017/06/d3logo.png?fit=590%2C313&ssl=1"
+tags: "sporule,ckeditor,imgur,javascript"
+coverimage: "https://ckeditor.com/assets/images/og/ogimage-ck4-1ea514a336.png"
 ---
 
 ## Introduction
 
-D3.js it is a popular tool for Data Visualisation, I have spent a day to explore it and built a simple mind map application.
+I was trying out different rich text editors for web, they all good but I found CKEditor 4 is the easiest to set up.
 
-The application structure is quiet simple:
+## How to Implement
 
-- Back-end: Web API by Flask in Python
-- Front-end: D3.js
+### Download
 
-![mind map](https://i.imgur.com/RJHtEm1.png) 
+Go to [CKEditor Builder](https://ckeditor.com/cke4/builder).
+Click download after you pick the plugins, skins and langauges you want. Save the CKEditor files in the server. You can delete the example folder.
 
-As the focus is mainly on trying the D3.js, so the web api doesn't come with any security implementation.
+### Insert into your html file
 
-In addition, the JavaScript code is not organised very well. I might improve the code in the future if I have some spare time.
+- Add a textarea with id editor in your page.
 
-## Key Feature of D3.js
+```javascript
+<textarea id="editor"></textarea>
+```
 
-The only key feature I learned from the day is D3.js provides a very simple way to select New Data, Modified Data and Removed Data.
+- Load the ckeditor.js and the config.js from the downloaded files.
 
-1. New Data is accessed by blocks.enter()
+```javascript
+<!-- CK  Editor Module -->
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script src="/static/ckeditor/config.js"></script>
+```
 
-2. Modified Data is accessed by blocks
+- Use Javascript in the page to initiate the CKEditor.
 
-3. Removed Data is accessed by blocks.exit()
+```javascript
+CKEDITOR.replace( '#editor' );
+```
 
-These three functions enable the developer to update the graph simply.
+- Thats it, check your page and you will be able to see the CKEditor.
+- For uploading image, I have selected the Imgur plugin which allows me to upload the image to Imgur (Imgur is a free online image storage cloud) easily, what you need is a Client Id from the Imgur API, and then add it to the config.js
 
-## Implementation
-
-### Functionality of the Mind Map app
-
-1. Add a new mind block by left click any empty spaces
-
-2. Create a link between mind blocks by dragging from one to the other.
-
-3. Move mind blocks by dragging the special area in the block.
-
-4. Auto size of the mind blocks according to the content length.
-
-5. Save the current layout and blocks by click save.
-  
-### What is the Design
-
-1. Created two global arrays(Not a good practise): Blocks_Data for block information and Links_Data(Contains Parent and Child Information) for block links information
-
-2. Few functions to implement the link the blocks and store the information into Links_Data
-
-3. Convert two global arrays to JSON and save into the database through Web API.(Not a good practise)
-
-### Check The Code
-
-Please do check the GitHub code if you want to know the details, the repository is [hao-hao-hao/D3MindMap](https://github.com/hao-hao-hao/D3MindMap) .
+```javascript
+config.extraPlugins = 'imgur';
+config.imgurClientId = 'Your-Client-id';
+```

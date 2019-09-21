@@ -17,7 +17,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-
 export const { store, persistor } = configureStore(initialState);
 
 setTimeout(() => {
