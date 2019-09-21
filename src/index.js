@@ -12,8 +12,14 @@ import "./styles/styles.css";
 
 if ('serviceWorker' in navigator) {
     OfflinePluginRuntime.install({
+        onUpdating: () => {
+            console.log('SW Event:', 'onUpdating');
+        },
         onUpdateReady: () => { console.log("update is ready"); OfflinePluginRuntime.applyUpdate(); },
         onUpdated: () => console.log("sw assets updated"),
+        onUpdateFailed: () => {
+            console.log('SW Event:', 'onUpdateFailed');
+          }
     });
 }
 
@@ -21,7 +27,7 @@ export const { store, persistor } = configureStore(initialState);
 
 setTimeout(() => {
     store.dispatch(PostAction.loadPosts());
-},1000);
+}, 1000);
 
 
 

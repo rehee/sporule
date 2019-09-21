@@ -4,7 +4,7 @@ author: "Sporule"
 date: "2019-02-05"
 categories: "coding"
 tags: "golang,slice"
-coverimage:"https://www.vertica.com/wp-content/uploads/2019/07/Golang.png"
+coverimage: "https://www.vertica.com/wp-content/uploads/2019/07/Golang.png"
 ---
 
 ## Fun Fact
