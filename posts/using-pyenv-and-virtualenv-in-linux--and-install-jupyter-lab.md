@@ -4,7 +4,6 @@ author: "Sporule"
 date: "2019-08-18"
 categories: "notes"
 tags: "pyenv,jupyter lab,python,virtualenv"
-coverimage: "https://techdissected.com/wp-content/uploads/2015/04/Archon-Custom-Runtime-1920x500.jpg"
 ---
 
 ## Backgrounds
