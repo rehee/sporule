@@ -4,6 +4,7 @@ author: "Sporule"
 date: "2019-07-12"
 categories: "coding"
 tags: "webpack,onsenui,fontawsome"
+coverimage: "https://www.valentinog.com/blog/wp-content/uploads/2018/01/tutorial-webpack-4-featured.png"
 ---
 
 ## The problem
