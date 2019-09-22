@@ -9,7 +9,8 @@ coverimage: "https://i.imgur.com/xkhBTzk.png"
 
 ## Background
 
-I am building a micro blog system because I don't really like the concept of static site generator, I believe the content of the site should be dynamic while the site is static. However, I couldn't find any packages that does similar job so I built one.
+I am building a micro blog system because I don't really like the concept of static site generator, I believe the content of the site should be dynamic because I don't really want to rebuild the site again and again.
+Markdown-handler loads the markdown files on the fly through javascript and generate meta datas such as coverimage, thumbnail etc..
 
 ## Markdown Handler Details
 
