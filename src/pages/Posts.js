@@ -80,7 +80,7 @@ class Posts extends React.Component {
     render() {
         const pinnedPosts = PostHelper.getPinnedPosts(this.props.posts);
         const posts = PostHelper.getPostsByPage(this.props.posts, this.page, true, this.searchString, this.categories, this.tags);
-        if (posts.invalidPage || posts.length <= 0) {
+        if ((posts.length <= 0 && this.props.posts.length > 0) || posts.invalidPage) {
             window.location.href = "/";
             return null;
         }

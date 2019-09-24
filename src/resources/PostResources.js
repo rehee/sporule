@@ -26,7 +26,6 @@ export default class PostResources {
         }
         let mdHandler = new MarkdownHandler();
         return mdHandler.loadMds(paths).then(posts => {
-            console.log(posts);
             posts.hash = newHash;
             posts.categories = PostHelper.getCategories(posts);
             posts.tags = PostHelper.getTags(posts);
