@@ -33,7 +33,6 @@ class Posts extends React.Component {
                 "tags": [],
                 "invalidPage": false,
                 hash: "",
-                searchIndex: {}
             }
             ,
             "posts":
@@ -57,8 +56,7 @@ class Posts extends React.Component {
                 "categories": [],
                 "tags": [],
                 "invalidPage": false,
-                hash: "",
-                searchIndex: {}
+                hash: ""
             }
         };
         const categoriesString = this.props.match.params.categories;
