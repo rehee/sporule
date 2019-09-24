@@ -21,7 +21,7 @@ module.exports = {
     "jquery": "jQuery"
   },
   output: {
-    path: __dirname + '/dist', 
+    path: __dirname + '/dist',
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -82,7 +82,7 @@ module.exports = {
           to: '',
         },
         {
-          context: __dirname+"/posts",
+          context: __dirname + "/posts",
           from: 'images/**/*',
           to: '',
         }
@@ -101,7 +101,7 @@ module.exports = {
     }),
     new OfflinePlugin({
       responseStrategy: 'cache-first',
-      excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects','**/*.jpg','**/*.png','**/*.gif'],
+      excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects', '**/*.jpg', '**/*.png', '**/*.gif'],
       autoUpdate: 1000 * 60 * 2,
       externals: [
         'https://cdn.jsdelivr.net/npm/pwacompat@2.0.7/pwacompat.min.js',
