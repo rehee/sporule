@@ -70,26 +70,29 @@ export const getTags = (posts) => {
 }
 
 export const getPostsByPage = (posts, page, excludePinned, searchString, categories, tags) => {
-    let tempPosts = { ...posts };
-    tempPosts = postsFilter(tempPosts, excludePinned, searchString, categories, tags);
-    tempPosts = sortPost(tempPosts);
-    const postsSize = tempPosts.items.length;
-    const itemsPerPage = page > 0 ? Config.postPerPage : 99999999;
-    const totalPages = Math.ceil(postsSize / itemsPerPage);
-    tempPosts.items = tempPosts.items.slice((page - 1) * itemsPerPage, (page) * itemsPerPage);
-    tempPosts.totalPages = totalPages;
-    tempPosts.itemsPerPage = itemsPerPage;
-    tempPosts.hasPrevPage = page > 1;
-    tempPosts.hasNextPage = page < totalPages;
-    tempPosts.invalidPage = page > totalPages;
-    tempPosts.page = page;
-    return tempPosts;
+    if (posts.length > 0) {
+        let tempPosts = { ...posts };
+        tempPosts = postsFilter(tempPosts, excludePinned, searchString, categories, tags);
+        tempPosts = sortPost(tempPosts);
+        const postsSize = tempPosts.items.length;
+        const itemsPerPage = page > 0 ? Config.postPerPage : 99999999;
+        const totalPages = Math.ceil(postsSize / itemsPerPage);
+        tempPosts.items = tempPosts.items.slice((page - 1) * itemsPerPage, (page) * itemsPerPage);
+        tempPosts.totalPages = totalPages;
+        tempPosts.itemsPerPage = itemsPerPage;
+        tempPosts.hasPrevPage = page > 1;
+        tempPosts.hasNextPage = page < totalPages;
+        tempPosts.invalidPage = page > totalPages;
+        tempPosts.page = page;
+        return tempPosts;
+    }
+    return posts;
 }
 
 export const postsFilter = (posts, excludePinned, searchString, categories, tags) => {
     let tempPosts = { ...posts };
     if (searchString) {
-        tempPosts.items = tempPosts.items.filter(o=>o.title.includes(searchString));
+        tempPosts.items = tempPosts.items.filter(o => o.title.includes(searchString));
     }
     if (excludePinned) {
         tempPosts.items = tempPosts.items.filter(o => {
