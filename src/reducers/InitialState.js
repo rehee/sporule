@@ -20,8 +20,7 @@ export default {
     "categories": [],
     "tags": [],
     "invalidPage": false,
-    hash: "",
-    searchIndex: {}
+    hash: ""
   }
 };
 
