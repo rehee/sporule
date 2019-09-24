@@ -86,7 +86,7 @@ module.exports = {
           to: '',
         },
         {
-          context: __dirname+"/posts",
+          context: __dirname + "/posts",
           from: 'images/**/*',
           to: '',
         }
@@ -113,8 +113,8 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new OfflinePlugin({
       responseStrategy: 'cache-first',
-      excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects','**/*.jpg','**/*.png','**/*.gif'],
-      autoUpdate: 1000 * 60 * 2,
+      excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects', '**/*.jpg', '**/*.png', '**/*.gif'],
+      autoUpdate: 1000 * 60 * 60 * 10,
       externals: [
         'https://cdn.jsdelivr.net/npm/pwacompat@2.0.7/pwacompat.min.js',
         'https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.slim.min.js',
