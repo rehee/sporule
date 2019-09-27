@@ -9,6 +9,7 @@ const Config = require("./_config");
 
 process.env.NODE_ENV = "development";
 
+
 module.exports = {
   mode: process.env.NODE_ENV,
   devtool: 'inline-source-map',
