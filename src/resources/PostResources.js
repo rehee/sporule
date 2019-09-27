@@ -35,6 +35,7 @@ export default class PostResources {
             posts.categories = PostHelper.getCategories(posts);
             posts.tags = PostHelper.getTags(posts);
             posts = PostHelper.addLink(posts);
+            console.log(posts);
             return new Promise((resolve, reject) => {
                 resolve(posts);
             });
