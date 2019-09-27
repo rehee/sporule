@@ -20,10 +20,10 @@ class Main extends React.Component {
 
     render() {
         return (
-            <Router>
+            <Router  basename={"https://hao-hao-hao.github.io/sporule/"}>
                 <Nav />
                 <Switch>
-                    <Route exact path={process.env.PUBLIC_URL + '/'} component={Posts} />
+                    <Route exact path={'/'} component={Posts} />
                     <Route exact path="/categories/:categories" component={Posts} />
                     <Route exact path="/posts/:path" component={Post} />
                     <Route exact path="/pages/:page" component={CustomPage} />
