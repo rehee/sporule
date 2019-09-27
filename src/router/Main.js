@@ -23,7 +23,7 @@ class Main extends React.Component {
             <Router>
                 <Nav />
                 <Switch>
-                    <Route exact path="/sporule/" component={Posts} />
+                    <Route exact path="/" component={Posts} />
                     <Route exact path="/categories/:categories" component={Posts} />
                     <Route exact path="/posts/:path" component={Post} />
                     <Route exact path="/pages/:page" component={CustomPage} />

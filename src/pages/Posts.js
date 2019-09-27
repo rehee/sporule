@@ -10,6 +10,7 @@ import * as PostHelper from "../helpers/postHelper";
 class Posts extends React.Component {
     constructor(props, context) {
         super(props, context);
+        console.log("mounted posts")
         this.state = {
             "pinnedPosts":
             {
