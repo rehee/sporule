@@ -5,7 +5,8 @@
   "scripts": {
     "start": "npx webpack-dev-server --config ./webpack.config.dev.js",
     "test": "jest",
-    "build": "npx webpack --config webpack.config.prod.js"
+    "build": "npx webpack --config webpack.config.prod.js",
+    "build-gh":"npx webpack --config webpack.config.git.js"
   },
   "author": "Sporule.com",
   "license": "MIT",
