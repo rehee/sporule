@@ -18,7 +18,7 @@ export function loadPosts(paths) {
     return function (dispatch) {
         return resources.getAll(paths).then(Posts => {
             if (Posts) {
-                console.log("dispatching posts", posts);
+                console.log("dispatching posts", Posts);
                 dispatch(loadPostsSuccess(Posts));
             }
         })
