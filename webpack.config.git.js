@@ -12,7 +12,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 const Config = require("./_config");
 
-let route = "https://raw.githubusercontent.com/"+process.env.GITHUB_REPOSITORY+"/gh-pages";
+let route = "https://raw.githubusercontent.com/"+process.env.GITHUB_REPOSITORY+"/gh-pages/";
 
 console.log(route);
 
