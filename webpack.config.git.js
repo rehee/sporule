@@ -14,6 +14,8 @@ const Config = require("./_config");
 
 let route = "https://raw.githubusercontent.com/"+process.env.GITHUB_REPOSITORY+"/gh-pages";
 
+console.log(route);
+
 const GLOBALS = {
   'process.env.ROUTE': JSON.stringify(route)
 };
