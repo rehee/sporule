@@ -38,6 +38,10 @@ export const addLink = (posts) => {
     let tempPosts = { ...posts };
     tempPosts.items = tempPosts.items.map(o => {
         o.link = o.path.replace(".md", "");
+        if(process.env.ROUTE){
+            o.link =o.link.replace(process.env.ROUTE,"");
+        }
+        
         return o;
     })
     return tempPosts;
