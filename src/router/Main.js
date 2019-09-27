@@ -15,13 +15,12 @@ import Footer from "../pages/Footer";
 class Main extends React.Component {
     constructor(props, context) {
         super(props, context);
-        console.log(process.env.PUBLIC_URL);
 
     }
 
     render() {
         return (
-            <Router  basename={process.env.PUBLIC_URL}>
+            <Router  basename="/sporule">
                 <Nav />
                 <Switch>
                     <Route exact path="/" component={Posts} />
