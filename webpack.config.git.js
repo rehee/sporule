@@ -49,6 +49,18 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        include: [
+          path.resolve(__dirname, "template/")
+        ],
+        loader: 'string-replace-loader',
+        options: {
+          search: 'href\: \"\/',
+          replace: `href: "/` + repo + "/",
+          flags: 'g'
+        }
+      },
+      {
         test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
         use: {
@@ -97,6 +109,11 @@ module.exports = {
         {
           context: __dirname + "/posts",
           from: 'images/**/*',
+          to: '',
+        },
+        {
+          context: __dirname + "/gh-pages",
+          from: '404.html',
           to: '',
         }
       ]
