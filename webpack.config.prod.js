@@ -90,7 +90,13 @@ module.exports = {
           context: __dirname + "/posts",
           from: 'images/**/*',
           to: '',
+        },
+        {
+          context: __dirname + "/src",
+          from: 'yandex_c056ab49df11b855.html',
+          to: '',
         }
+        
       ]
     ),
     new SitemapPlugin(Config.url, [
