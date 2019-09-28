@@ -10,6 +10,9 @@ export default class PostResources {
         if (!instance) {
             const context = require.context("../../posts", false, /\.md$/)
             this.defaultPaths = context.keys().map(context);
+            if (process.env.ROUTE) {
+                this.defaultPaths = this.defaultPaths.map(o => process.env.ROUTE + o);
+            }
             instance = this;
         }
         return instance;

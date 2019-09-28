@@ -17,7 +17,7 @@ let repo = process.env.GITHUB_REPOSITORY.split("/")[1];
 
 const GLOBALS = {
   'process.env.ROUTE': JSON.stringify(route),
-  'process.env.REPO':JSON.stringify(repo)
+  'process.env.REPO': JSON.stringify(repo)
 };
 
 
