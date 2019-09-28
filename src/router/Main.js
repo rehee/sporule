@@ -15,12 +15,12 @@ import Footer from "../pages/Footer";
 class Main extends React.Component {
     constructor(props, context) {
         super(props, context);
-
+        this.basename = process.env.REPO ? process.env.REPO : "/";
     }
 
     render() {
         return (
-            <Router  basename="/sporule">
+            <Router basename={this.basename}>
                 <Nav />
                 <Switch>
                     <Route exact path="/" component={Posts} />

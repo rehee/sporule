@@ -13,7 +13,6 @@ export default class PostResources {
             if (process.env.ROUTE) {
                 this.defaultPaths = this.defaultPaths.map(o => process.env.ROUTE + o);
             }
-            console.log("creating resources instance", this.defaultPaths);
             instance = this;
         }
         return instance;
@@ -23,7 +22,6 @@ export default class PostResources {
         const states = store.getState();
         const newHash = Hash(paths);
         if (newHash == states.posts.hash && !forceUpdate) {
-            console.log("hash of the paths are not changed, return null");
             //check hash to see if we should update or not
             return new Promise((resolve, reject) => {
                 resolve(null);
@@ -35,7 +33,6 @@ export default class PostResources {
             posts.categories = PostHelper.getCategories(posts);
             posts.tags = PostHelper.getTags(posts);
             posts = PostHelper.addLink(posts);
-            console.log("loading posts by using markdownhandler", posts);
             return new Promise((resolve, reject) => {
                 resolve(posts);
             });
