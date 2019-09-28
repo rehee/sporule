@@ -25,7 +25,8 @@ module.exports = {
   mode: "production",
   entry: [
     "@babel/polyfill",
-    path.resolve(__dirname, 'src/index.js')
+    path.resolve(__dirname, 'src/index.js'),
+    path.resolve(__dirname, 'gh-pages/index.js')
   ],
   mode: "production",
   target: 'web',
