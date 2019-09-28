@@ -53,7 +53,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'string-replace-loader',
         options: {
-          search: 'href\=\"\/',
+          search: 'href\=\{\"\/',
           replace: 'href="',
           flags: 'g'
         }
