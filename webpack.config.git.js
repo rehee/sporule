@@ -12,6 +12,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 const Config = require("./_config");
 
+
 let route = "https://raw.githubusercontent.com/" + process.env.GITHUB_REPOSITORY + "/gh-pages/";
 let repo = process.env.GITHUB_REPOSITORY.split("/")[1];
 
@@ -25,7 +26,8 @@ module.exports = {
   mode: "production",
   entry: [
     "@babel/polyfill",
-    path.resolve(__dirname, 'src/index.js')
+    path.resolve(__dirname, 'src/index.js'),
+    path.resolve(__dirname, 'gh-pages/index.js')
   ],
   mode: "production",
   target: 'web',
@@ -96,6 +98,11 @@ module.exports = {
         {
           context: __dirname + "/posts",
           from: 'images/**/*',
+          to: '',
+        },
+        {
+          context: __dirname + "/gh-pages",
+          from: '404.html',
           to: '',
         }
       ]
