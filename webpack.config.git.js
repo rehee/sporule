@@ -12,7 +12,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 const Config = require("./_config");
 
-
 let route = "https://raw.githubusercontent.com/" + process.env.GITHUB_REPOSITORY + "/gh-pages/";
 let repo = process.env.GITHUB_REPOSITORY.split("/")[1];
 
@@ -60,6 +59,14 @@ module.exports = {
         test: /\.js$/,
         loaders: ['unlazy'],
         include: /node_modules\/markdown-toc/
+      },
+      {
+        test: /\.js$/,
+        loader: 'string-replace-loader',
+        options: {
+          search: 'href="/',
+          replace: 'href="',
+        }
       },
       {
         test: /(\.css)$/,
