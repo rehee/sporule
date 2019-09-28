@@ -12,10 +12,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 const Config = require("./_config");
 
-let route = "https://raw.githubusercontent.com/"+process.env.GITHUB_REPOSITORY+"/gh-pages";
+let route = "https://raw.githubusercontent.com/" + process.env.GITHUB_REPOSITORY + "/gh-pages";
+let repo = process.env.GITHUB_REPOSITORY.split("/")[1];
 
 const GLOBALS = {
-  'process.env.ROUTE': JSON.stringify(route)
+  'process.env.ROUTE': JSON.stringify(route),
+  'process.env.REPO': JSON.stringify(repo)
 };
 
 
@@ -32,7 +34,6 @@ module.exports = {
   },
   output: {
     path: __dirname + '/dist',
-    publicPath: '/',
     filename: '[name].[contenthash].js'
   },
   devServer: {
