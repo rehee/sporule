@@ -25,7 +25,7 @@ class Main extends React.Component {
                 <Switch>
                     <Route exact path="/" component={Posts} />
                     <Route exact path="/categories/:categories" component={Posts} />
-                    <Route exact path="/posts/:path" component={Post} />
+                    <Route exact path="/items/:path" component={Post} />
                     <Route exact path="/pages/:page" component={CustomPage} />
                 </Switch>
                 <Footer />
