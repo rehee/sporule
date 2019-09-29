@@ -15,6 +15,10 @@ const Config = require("./_config");
 let route = "https://raw.githubusercontent.com/" + process.env.GITHUB_REPOSITORY + "/gh-pages/";
 let repo = process.env.GITHUB_REPOSITORY.split("/")[1];
 
+let replaceString = `href: "/` + repo + "/";
+if (Config.gh_custom_domain) {
+  replaceString = 'href: "/';
+}
 
 const GLOBALS = {
   'process.env.ROUTE': JSON.stringify(route),
@@ -58,7 +62,7 @@ module.exports = {
         loader: 'string-replace-loader',
         options: {
           search: 'href\: \"\/',
-          replace: `href: "/` + repo + "/",
+          replace: replaceString,
           flags: 'g'
         }
       },
@@ -147,7 +151,7 @@ module.exports = {
     new webpack.DefinePlugin(GLOBALS),
     new OfflinePlugin({
       responseStrategy: 'cache-first',
-      excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects', '**/*.jpg', '**/*.png', '**/*.gif'],
+      excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects', '**/*.jpg', '**/*.png', '**/*.gif', "**/CNAME"],
       autoUpdate: 1000 * 60 * 60 * 10,
       externals: [
         'https://cdn.jsdelivr.net/npm/pwacompat@2.0.7/pwacompat.min.js',

@@ -39,7 +39,7 @@ export const addLink = (posts) => {
     tempPosts.items = tempPosts.items.map(o => {
         o.link = o.path.replace(".md", "").replace("posts", "items");
         if (process.env.ROUTE && !Config.gh_custom_domain) {
-            o.link = "/" + process.env.REPO + o.link.replace(process.env.ROUTE, "");
+            o.link = Config.gh_custom_domain ? o.link.replace(process.env.ROUTE, "") : "/" + process.env.REPO + o.link.replace(process.env.ROUTE, "")
         }
 
         return o;
