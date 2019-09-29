@@ -4,9 +4,9 @@ const Config = {
     description: "Sporule is a micro blog site",
     keywords:"micro blog",
     logo:"https://i.imgur.com/MrRLOC4.png",
-    disqusShortname:"yourdisqusshortname",
+    disqusShortname:"sporule",
     postPerPage:8,
-    googleAnaltics:""
+    googleAnaltics:"UA-114032457-1"
 }
 
 module.exports = Config;

@@ -90,6 +90,11 @@ module.exports = {
           context: __dirname + "/posts",
           from: 'images/**/*',
           to: '',
+        },
+        {
+          context: __dirname + "/src",
+          from: 'yandex_a1ea01ae816554fb.html',
+          to: '',
         }
         
       ]

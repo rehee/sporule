@@ -37,11 +37,11 @@ export const sortPost = (posts, isDesc = true) => {
 export const addLink = (posts) => {
     let tempPosts = { ...posts };
     tempPosts.items = tempPosts.items.map(o => {
-        o.link = o.path.replace(".md", "").replace("posts","items");
-        if(process.env.ROUTE){
+        o.link = o.path.replace(".md", "").replace("posts", "items");
+        if (process.env.ROUTE) {
             o.link = "/" + process.env.REPO + o.link.replace(process.env.ROUTE, "");
         }
-        
+
         return o;
     })
     return tempPosts;
