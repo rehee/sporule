@@ -117,6 +117,11 @@ module.exports = {
           context: __dirname + "/gh-pages",
           from: '404.html',
           to: '',
+        }m
+        {
+          context: __dirname + "/gh-pages",
+          from: 'CNAME',
+          to: '',
         }
       ]
     ),
