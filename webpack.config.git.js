@@ -15,6 +15,7 @@ const Config = require("./_config");
 let route = "https://raw.githubusercontent.com/" + process.env.GITHUB_REPOSITORY + "/gh-pages/";
 let repo = process.env.GITHUB_REPOSITORY.split("/")[1];
 
+
 const GLOBALS = {
   'process.env.ROUTE': JSON.stringify(route),
   'process.env.REPO': JSON.stringify(repo)
@@ -35,7 +36,7 @@ module.exports = {
   },
   output: {
     path: __dirname + '/dist',
-    publicPath: '/'+repo+"/",
+    publicPath: Config.gh_custom_domain ? "/" : '/' + repo + "/",
     filename: '[name].[contenthash].js'
   },
   devServer: {
