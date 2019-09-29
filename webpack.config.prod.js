@@ -93,7 +93,7 @@ module.exports = {
         },
         {
           context: __dirname + "/src",
-          from: 'yandex_c056ab49df11b855.html',
+          from: 'yandex_a1ea01ae816554fb.html',
           to: '',
         }
       ]
