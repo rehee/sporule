@@ -1,5 +1,6 @@
 import * as types from './ActionTypes';
 import PostResources from "../resources/PostResources";
+import { posts } from '../reducers/PostReducer';
 
 
 export function loadPostsSuccess(Posts) {

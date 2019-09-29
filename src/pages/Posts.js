@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import queryString from 'query-string';
 import * as PostActions from "../actions/PostAction";
-import PostsTemplate from "../../templates/posts";
+import PostsTemplate from "../../template/posts";
 import * as PostHelper from "../helpers/postHelper";
 
 
@@ -33,7 +33,6 @@ class Posts extends React.Component {
                 "tags": [],
                 "invalidPage": false,
                 hash: "",
-                searchIndex: {}
             }
             ,
             "posts":
@@ -57,8 +56,7 @@ class Posts extends React.Component {
                 "categories": [],
                 "tags": [],
                 "invalidPage": false,
-                hash: "",
-                searchIndex: {}
+                hash: ""
             }
         };
         const categoriesString = this.props.match.params.categories;
@@ -70,6 +68,10 @@ class Posts extends React.Component {
 
     }
 
+    componentDidMount() {
+        document.title = document.title.split(" - ")[0] + " - " + "Posts";
+    }
+
 
     toPage = (page) => {
         window.location.href = window.location.pathname + "?page=" + page;
@@ -78,8 +80,8 @@ class Posts extends React.Component {
     render() {
         const pinnedPosts = PostHelper.getPinnedPosts(this.props.posts);
         const posts = PostHelper.getPostsByPage(this.props.posts, this.page, true, this.searchString, this.categories, this.tags);
-        if (posts.invalidPage) {
-            //window.location.href = "/";
+        if ((posts.length <= 0 && this.props.posts.length > 0) || posts.invalidPage) {
+            window.location.href = "/";
             return null;
         }
 

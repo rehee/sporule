@@ -13,6 +13,7 @@ export const getPinnedPosts = (posts) => {
 }
 
 export const removeFuturePosts = (posts) => {
+    //remove future and posts with no date
     let tempPosts = { ...posts };
     tempPosts.items = tempPosts.items.filter(post => {
         if (post.metas.date && post.metas.date != "null") {
@@ -24,7 +25,7 @@ export const removeFuturePosts = (posts) => {
 }
 
 export const sortPost = (posts, isDesc = true) => {
-    let tempPosts = { ...posts };
+    let tempPosts = removeFuturePosts({ ...posts });
     tempPosts.items = tempPosts.items.sort((a, b) => {
         let dateA = new Date(a.metas.date);
         let dateB = new Date(b.metas.date);
@@ -35,9 +36,15 @@ export const sortPost = (posts, isDesc = true) => {
 
 export const addLink = (posts) => {
     let tempPosts = { ...posts };
-    return tempPosts.items.map(o => {
-        o.link = o.path.replace(".md", "");
+    tempPosts.items = tempPosts.items.map(o => {
+        o.link = o.path.replace(".md", "").replace("posts", "items");
+        if (process.env.ROUTE) {
+            o.link = Config.gh_custom_domain ? o.link.replace(process.env.ROUTE, "") : "/" + process.env.REPO + o.link.replace(process.env.ROUTE, "")
+        }
+
+        return o;
     })
+    return tempPosts;
 }
 
 export const getCategories = (posts) => {
@@ -78,7 +85,7 @@ export const getPostsByPage = (posts, page, excludePinned, searchString, categor
     tempPosts.itemsPerPage = itemsPerPage;
     tempPosts.hasPrevPage = page > 1;
     tempPosts.hasNextPage = page < totalPages;
-    tempPosts.invalidPage = page > totalPages;
+    tempPosts.invalidPage = (page > totalPages) && (totalPages != 0);
     tempPosts.page = page;
     return tempPosts;
 }
@@ -86,7 +93,7 @@ export const getPostsByPage = (posts, page, excludePinned, searchString, categor
 export const postsFilter = (posts, excludePinned, searchString, categories, tags) => {
     let tempPosts = { ...posts };
     if (searchString) {
-        tempPosts.items = tempPosts.fuse.search(searchString);
+        tempPosts.items = tempPosts.items.filter(o => o.title.includes(searchString));
     }
     if (excludePinned) {
         tempPosts.items = tempPosts.items.filter(o => {
@@ -103,5 +110,5 @@ export const postsFilter = (posts, excludePinned, searchString, categories, tags
             return Utility.isIntersect(o.metas.tags, tags);
         })
     }
-    return removeFuturePosts(tempPosts);
+    return tempPosts;
 }
