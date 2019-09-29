@@ -16,8 +16,10 @@ let route = "https://raw.githubusercontent.com/" + process.env.GITHUB_REPOSITORY
 let repo = process.env.GITHUB_REPOSITORY.split("/")[1];
 
 let replaceString = `href: "/` + repo + "/";
+let cnameFile = "404.html";
 if (Config.gh_custom_domain) {
   replaceString = 'href: "/';
+  cnameFile = "CNAME";
 }
 
 const GLOBALS = {
@@ -124,7 +126,7 @@ module.exports = {
         },
         {
           context: __dirname + "/gh-pages",
-          from: 'CNAME',
+          from: cnameFile,
           to: '',
         }
       ]
