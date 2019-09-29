@@ -39,7 +39,7 @@ export const addLink = (posts) => {
     tempPosts.items = tempPosts.items.map(o => {
         o.link = o.path.replace(".md", "").replace("posts","items");
         if(process.env.ROUTE){
-            o.link =o.link.replace(process.env.ROUTE,"");
+            o.link = "/" + process.env.REPO + o.link.replace(process.env.ROUTE, "");
         }
         
         return o;

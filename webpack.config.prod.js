@@ -90,11 +90,6 @@ module.exports = {
           context: __dirname + "/posts",
           from: 'images/**/*',
           to: '',
-        },
-        {
-          context: __dirname + "/src",
-          from: 'yandex_c056ab49df11b855.html',
-          to: '',
         }
         
       ]
@@ -118,7 +113,6 @@ module.exports = {
       templateParameters: Config
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.DefinePlugin(GLOBALS),
     new OfflinePlugin({
       responseStrategy: 'cache-first',
       excludes: ['**/.*', '**/*.map', '**/*.gz', '**/*.txt', '**/sw.js', '**/*.md', '**/_redirects', '**/*.jpg', '**/*.png', '**/*.gif'],
