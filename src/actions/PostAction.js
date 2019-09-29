@@ -13,12 +13,10 @@ export function clearPostsSuccess() {
 }
 
 export function loadPosts(paths) {
-    console.log("Load Posts");
     let resources = new PostResources();
     return function (dispatch) {
         return resources.getAll(paths).then(Posts => {
             if (Posts) {
-                console.log("dispatching posts", Posts);
                 dispatch(loadPostsSuccess(Posts));
             }
         })
